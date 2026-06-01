@@ -7,16 +7,17 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: #f5f7fb;
+      --bg: #eef1f4;
       --panel: #ffffff;
-      --panel-soft: #eef2f8;
-      --line: #d8e0ea;
-      --text: #172033;
-      --muted: #637087;
-      --accent: #1f7a68;
-      --accent-strong: #146455;
-      --danger: #b3343d;
-      --shadow: 0 18px 45px rgba(35, 50, 78, 0.12);
+      --panel-soft: #f4f6f8;
+      --line: #d6dde5;
+      --text: #111827;
+      --muted: #667085;
+      --accent: #0f8f7a;
+      --accent-strong: #08715f;
+      --gold: #c9962b;
+      --danger: #c2414a;
+      --shadow: 0 18px 46px rgba(18, 25, 38, 0.13);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -28,7 +29,7 @@
       margin: 0;
       min-height: 100vh;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(245, 247, 251, 0.8)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 241, 244, 0.94) 48%, rgba(247, 247, 244, 0.96)),
         var(--bg);
       color: var(--text);
     }
@@ -46,7 +47,7 @@
     .app {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+      grid-template-columns: minmax(340px, 440px) minmax(0, 1fr);
       gap: 0;
     }
 
@@ -54,7 +55,7 @@
       min-height: 100vh;
       padding: 24px;
       border-right: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(18px);
       display: flex;
       flex-direction: column;
@@ -73,7 +74,7 @@
       height: 38px;
       border-radius: 8px;
       background:
-        linear-gradient(135deg, #1f7a68 0 48%, #f2b84b 48% 100%);
+        linear-gradient(135deg, #111827 0 44%, #0f8f7a 44% 73%, #c9962b 73% 100%);
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
     }
 
@@ -82,6 +83,18 @@
       font-size: 20px;
       line-height: 1.2;
       letter-spacing: 0;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 3px;
+    }
+
+    .brand-copy span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.2;
     }
 
     .upload {
@@ -94,6 +107,7 @@
       text-align: center;
       min-height: 132px;
       transition: border-color 0.18s ease, background 0.18s ease;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
     }
 
     .upload.is-dragging {
@@ -137,7 +151,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 16px;
-      box-shadow: 0 8px 24px rgba(35, 50, 78, 0.06);
+      box-shadow: 0 10px 28px rgba(18, 25, 38, 0.07);
     }
 
     .panel-title {
@@ -159,6 +173,12 @@
       gap: 7px;
     }
 
+    .stack {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
     .field label,
     .toggle span,
     .radio-title {
@@ -178,6 +198,7 @@
       background: #fff;
       color: var(--text);
       outline: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
     }
 
     input[type="number"]:focus,
@@ -249,6 +270,81 @@
       overflow-wrap: anywhere;
     }
 
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .preset-btn {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .preset-btn:hover {
+      border-color: rgba(15, 143, 122, 0.7);
+      background: #edf8f5;
+    }
+
+    .image-list {
+      display: grid;
+      gap: 8px;
+      max-height: 150px;
+      overflow: auto;
+    }
+
+    .image-item {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 7px;
+      background: #fff;
+      color: var(--text);
+      text-align: left;
+    }
+
+    .image-item.is-active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(15, 143, 122, 0.13);
+    }
+
+    .image-item img {
+      width: 42px;
+      height: 42px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: var(--panel-soft);
+    }
+
+    .image-item strong,
+    .image-item span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .image-item strong {
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .image-item span {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
     .actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -307,7 +403,7 @@
     .summary {
       min-height: 58px;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 12px;
     }
 
@@ -392,6 +488,31 @@
       box-shadow: 0 10px 28px rgba(23, 32, 51, 0.18);
     }
 
+    .canvas-wrap {
+      max-width: 100%;
+      max-height: 100%;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .canvas-wrap canvas,
+    .split-overlay {
+      grid-area: 1 / 1;
+    }
+
+    .split-overlay {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background-image:
+        linear-gradient(to right, transparent calc(100% - 1px), rgba(255, 255, 255, 0.9) calc(100% - 1px)),
+        linear-gradient(to bottom, transparent calc(100% - 1px), rgba(255, 255, 255, 0.9) calc(100% - 1px));
+      background-size: calc(100% / var(--cols)) 100%, 100% calc(100% / var(--rows));
+      box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.55);
+      mix-blend-mode: difference;
+    }
+
     .empty-state {
       color: var(--muted);
       font-size: 14px;
@@ -465,16 +586,24 @@
     <aside class="sidebar">
       <div class="brand">
         <div class="mark" aria-hidden="true"></div>
-        <h1>图片尺寸工具</h1>
+        <div class="brand-copy">
+          <h1>图片尺寸工具</h1>
+          <span>Resize, compress and slice locally</span>
+        </div>
       </div>
 
       <section class="upload" id="dropZone">
-        <input id="fileInput" type="file" accept="image/*">
+        <input id="fileInput" type="file" accept="image/*" multiple>
         <label class="upload-label" for="fileInput">
           <strong>选择图片</strong>
-          <span>支持拖放到此处</span>
+          <span>支持多选或拖放到此处</span>
           <span class="file-name" id="fileName">未选择文件</span>
         </label>
+      </section>
+
+      <section class="panel" id="queuePanel" hidden>
+        <p class="panel-title">图片列表</p>
+        <div class="image-list" id="imageList"></div>
       </section>
 
       <section class="panel">
@@ -493,6 +622,14 @@
           <input id="lockRatio" type="checkbox">
           <span>锁定原图比例</span>
         </label>
+        <div class="preset-grid" id="presetGrid">
+          <button class="preset-btn" type="button" data-width="640" data-height="640">640 x 640</button>
+          <button class="preset-btn" type="button" data-width="1080" data-height="1080">1080 x 1080</button>
+          <button class="preset-btn" type="button" data-width="1920" data-height="1080">16:9</button>
+          <button class="preset-btn" type="button" data-width="1080" data-height="1920">9:16</button>
+          <button class="preset-btn" type="button" data-width="1080" data-height="1440">3:4</button>
+          <button class="preset-btn" type="button" data-width="1440" data-height="1080">4:3</button>
+        </div>
       </section>
 
       <section class="panel">
@@ -519,6 +656,20 @@
               <small>强制匹配目标宽高</small>
             </span>
           </label>
+        </div>
+        <div class="field stack" id="anchorField">
+          <label for="cropAnchor">裁剪位置</label>
+          <select id="cropAnchor">
+            <option value="center">居中</option>
+            <option value="top">顶部</option>
+            <option value="bottom">底部</option>
+            <option value="left">左侧</option>
+            <option value="right">右侧</option>
+            <option value="top-left">左上</option>
+            <option value="top-right">右上</option>
+            <option value="bottom-left">左下</option>
+            <option value="bottom-right">右下</option>
+          </select>
         </div>
       </section>
 
@@ -590,6 +741,10 @@
           <span>输出</span>
           <strong id="outputMetric">PNG</strong>
         </div>
+        <div class="metric">
+          <span>预估大小</span>
+          <strong id="estimateMetric">-</strong>
+        </div>
       </div>
 
       <div class="preview-shell">
@@ -609,7 +764,10 @@
             <span id="outputSizeLabel">1080 x 1080</span>
           </div>
           <div class="stage" id="outputStage">
-            <canvas id="outputCanvas" width="1080" height="1080" hidden></canvas>
+            <div class="canvas-wrap" id="canvasWrap" hidden>
+              <canvas id="outputCanvas" width="1080" height="1080"></canvas>
+              <div class="split-overlay" id="splitOverlay" hidden></div>
+            </div>
             <div class="empty-state" id="outputEmpty">等待图片</div>
           </div>
         </section>
@@ -620,18 +778,27 @@
   <script>
     const state = {
       image: null,
+      images: [],
+      activeIndex: -1,
       sourceUrl: "",
       sourceName: "",
-      lastChangedDimension: "width"
+      lastChangedDimension: "width",
+      estimateTimer: 0,
+      estimateToken: 0
     };
 
     const els = {
       fileInput: document.querySelector("#fileInput"),
       dropZone: document.querySelector("#dropZone"),
       fileName: document.querySelector("#fileName"),
+      queuePanel: document.querySelector("#queuePanel"),
+      imageList: document.querySelector("#imageList"),
       targetWidth: document.querySelector("#targetWidth"),
       targetHeight: document.querySelector("#targetHeight"),
       lockRatio: document.querySelector("#lockRatio"),
+      presetGrid: document.querySelector("#presetGrid"),
+      cropAnchor: document.querySelector("#cropAnchor"),
+      anchorField: document.querySelector("#anchorField"),
       format: document.querySelector("#format"),
       backgroundColor: document.querySelector("#backgroundColor"),
       quality: document.querySelector("#quality"),
@@ -647,9 +814,12 @@
       targetMetric: document.querySelector("#targetMetric"),
       ratioMetric: document.querySelector("#ratioMetric"),
       outputMetric: document.querySelector("#outputMetric"),
+      estimateMetric: document.querySelector("#estimateMetric"),
       sourceStage: document.querySelector("#sourceStage"),
+      canvasWrap: document.querySelector("#canvasWrap"),
       outputCanvas: document.querySelector("#outputCanvas"),
       outputEmpty: document.querySelector("#outputEmpty"),
+      splitOverlay: document.querySelector("#splitOverlay"),
       sourceSizeLabel: document.querySelector("#sourceSizeLabel"),
       outputSizeLabel: document.querySelector("#outputSizeLabel")
     };
@@ -679,6 +849,20 @@
       return document.querySelector('input[name="fitMode"]:checked').value;
     }
 
+    function getAnchorPoint() {
+      return {
+        "top-left": { x: 0, y: 0 },
+        top: { x: 0.5, y: 0 },
+        "top-right": { x: 1, y: 0 },
+        left: { x: 0, y: 0.5 },
+        center: { x: 0.5, y: 0.5 },
+        right: { x: 1, y: 0.5 },
+        "bottom-left": { x: 0, y: 1 },
+        bottom: { x: 0.5, y: 1 },
+        "bottom-right": { x: 1, y: 1 }
+      }[els.cropAnchor.value] || { x: 0.5, y: 0.5 };
+    }
+
     function getExtension() {
       return {
         "image/png": "png",
@@ -696,6 +880,10 @@
       const cols = Math.min(MAX_GRID_SIDE, Math.max(1, Math.floor(Number(els.splitCols.value) || 1)));
       const rows = Math.min(MAX_GRID_SIDE, Math.max(1, Math.floor(Number(els.splitRows.value) || 1)));
       return { cols, rows, count: cols * rows };
+    }
+
+    function sanitizeName(name) {
+      return (name || "image").replace(/\.[^.]+$/, "").replace(/[\\/:*?"<>|]+/g, "_").trim() || "image";
     }
 
     function formatBytes(bytes) {
@@ -726,11 +914,21 @@
       els.outputMetric.textContent = count > 1 ? `${outputName} / ${cols}x${rows}` : outputName;
       els.outputSizeLabel.textContent = `${width} x ${height}`;
       els.qualityField.style.display = els.format.value === "image/png" ? "none" : "grid";
+      els.anchorField.hidden = getFitMode() !== "cover";
+      els.downloadBtn.textContent = state.images.length > 1 ? `批量下载 ${state.images.length} 张` : count > 1 ? `下载 ${count} 张切图` : "下载图片";
+      updateSplitOverlay();
 
       if (state.image) {
         els.sourceMetric.textContent = `${state.image.naturalWidth} x ${state.image.naturalHeight}`;
         els.sourceSizeLabel.textContent = `${state.image.naturalWidth} x ${state.image.naturalHeight}`;
       }
+    }
+
+    function updateSplitOverlay() {
+      const { cols, rows, count } = getSplitGrid();
+      els.splitOverlay.hidden = count <= 1 || !state.image || els.canvasWrap.hidden;
+      els.splitOverlay.style.setProperty("--cols", String(cols));
+      els.splitOverlay.style.setProperty("--rows", String(rows));
     }
 
     function validateTargetSize(width, height) {
@@ -776,16 +974,17 @@
       updateMetrics();
 
       if (!state.image) {
-        els.outputCanvas.hidden = true;
+        els.canvasWrap.hidden = true;
         els.outputEmpty.hidden = false;
         els.downloadBtn.disabled = true;
+        els.estimateMetric.textContent = "-";
         return;
       }
 
       const { width, height } = getTargetSize();
       const validation = validateTargetSize(width, height);
       if (validation) {
-        els.outputCanvas.hidden = true;
+        els.canvasWrap.hidden = true;
         els.outputEmpty.hidden = false;
         els.downloadBtn.disabled = true;
         setStatus(validation, true);
@@ -794,7 +993,7 @@
 
       const splitValidation = validateSplitGrid(width, height);
       if (splitValidation) {
-        els.outputCanvas.hidden = true;
+        els.canvasWrap.hidden = true;
         els.outputEmpty.hidden = false;
         els.downloadBtn.disabled = true;
         setStatus(splitValidation, true);
@@ -802,6 +1001,126 @@
       }
 
       const canvas = els.outputCanvas;
+      drawImageToCanvas(state.image, canvas);
+
+      els.canvasWrap.hidden = false;
+      els.outputEmpty.hidden = true;
+      els.downloadBtn.disabled = false;
+      updateSplitOverlay();
+      scheduleEstimate();
+      setStatus("已生成预览");
+    }
+
+    function loadImageFile(file) {
+      return new Promise((resolve, reject) => {
+        if (!file || !file.type.startsWith("image/")) {
+          reject(new Error("请选择图片文件"));
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          const img = new Image();
+          img.onload = () => {
+            resolve({
+              file,
+              image: img,
+              url: URL.createObjectURL(file),
+              name: sanitizeName(file.name),
+              displayName: file.name,
+              width: img.naturalWidth,
+              height: img.naturalHeight
+            });
+          };
+
+          img.onerror = () => reject(new Error("图片加载失败"));
+          img.src = reader.result;
+        };
+
+        reader.onerror = () => reject(new Error("文件读取失败"));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function renderImageList() {
+      els.queuePanel.hidden = state.images.length <= 1;
+      els.imageList.innerHTML = "";
+
+      state.images.forEach((item, index) => {
+        const button = document.createElement("button");
+        button.className = `image-item${index === state.activeIndex ? " is-active" : ""}`;
+        button.type = "button";
+
+        const thumb = document.createElement("img");
+        thumb.src = item.url;
+        thumb.alt = "";
+
+        const copy = document.createElement("span");
+        const name = document.createElement("strong");
+        const size = document.createElement("span");
+        name.textContent = item.displayName;
+        size.textContent = `${item.width} x ${item.height}`;
+        copy.append(name, size);
+        button.append(thumb, copy);
+
+        button.addEventListener("click", () => activateImage(index, false));
+        els.imageList.appendChild(button);
+      });
+    }
+
+    function activateImage(index, syncSize = true) {
+      const item = state.images[index];
+      if (!item) return;
+
+      state.activeIndex = index;
+      state.image = item.image;
+      state.sourceUrl = item.url;
+      state.sourceName = item.name;
+      els.fileName.textContent = state.images.length > 1 ? `${state.images.length} 张图片` : item.displayName;
+      els.sourceStage.innerHTML = "";
+
+      const preview = new Image();
+      preview.src = item.url;
+      preview.alt = item.displayName;
+      els.sourceStage.appendChild(preview);
+
+      if (syncSize && !els.lockRatio.checked) {
+        setTargetSize(item.width, item.height);
+      } else if (els.lockRatio.checked) {
+        syncLockedRatio(state.lastChangedDimension);
+      }
+
+      renderImageList();
+      drawOutput();
+    }
+
+    async function loadFiles(files) {
+      const imageFiles = [...files].filter((file) => file.type.startsWith("image/"));
+      if (imageFiles.length === 0) {
+        setStatus("请选择图片文件", true);
+        return;
+      }
+
+      state.images.forEach((item) => URL.revokeObjectURL(item.url));
+      state.images = [];
+      state.activeIndex = -1;
+      setStatus(`正在加载 ${imageFiles.length} 张图片...`);
+
+      try {
+        state.images = await Promise.all(imageFiles.map(loadImageFile));
+        activateImage(0, true);
+        setStatus(`已加载 ${state.images.length} 张图片`);
+      } catch (error) {
+        setStatus(error.message || "图片加载失败", true);
+      }
+    }
+
+    function loadFile(file) {
+      loadFiles([file]);
+    }
+
+    function drawImageToCanvas(image, canvas) {
+      const { width, height } = getTargetSize();
       const ctx = canvas.getContext("2d");
       canvas.width = width;
       canvas.height = height;
@@ -815,85 +1134,28 @@
         ctx.fillRect(0, 0, width, height);
       }
 
-      const sw = state.image.naturalWidth;
-      const sh = state.image.naturalHeight;
+      const sw = image.naturalWidth;
+      const sh = image.naturalHeight;
       const fitMode = getFitMode();
-
-      let dx = 0;
-      let dy = 0;
-      let dw = width;
-      let dh = height;
 
       if (fitMode === "contain") {
         const scale = Math.min(width / sw, height / sh);
-        dw = Math.round(sw * scale);
-        dh = Math.round(sh * scale);
-        dx = Math.round((width - dw) / 2);
-        dy = Math.round((height - dh) / 2);
-        ctx.drawImage(state.image, dx, dy, dw, dh);
+        const dw = Math.round(sw * scale);
+        const dh = Math.round(sh * scale);
+        const dx = Math.round((width - dw) / 2);
+        const dy = Math.round((height - dh) / 2);
+        ctx.drawImage(image, dx, dy, dw, dh);
       } else if (fitMode === "cover") {
         const scale = Math.max(width / sw, height / sh);
         const cropW = width / scale;
         const cropH = height / scale;
-        const sx = (sw - cropW) / 2;
-        const sy = (sh - cropH) / 2;
-        ctx.drawImage(state.image, sx, sy, cropW, cropH, 0, 0, width, height);
+        const anchor = getAnchorPoint();
+        const sx = (sw - cropW) * anchor.x;
+        const sy = (sh - cropH) * anchor.y;
+        ctx.drawImage(image, sx, sy, cropW, cropH, 0, 0, width, height);
       } else {
-        ctx.drawImage(state.image, 0, 0, width, height);
+        ctx.drawImage(image, 0, 0, width, height);
       }
-
-      els.outputCanvas.hidden = false;
-      els.outputEmpty.hidden = true;
-      els.downloadBtn.disabled = false;
-      setStatus("已生成预览");
-    }
-
-    function loadFile(file) {
-      if (!file || !file.type.startsWith("image/")) {
-        setStatus("请选择图片文件", true);
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        const img = new Image();
-        img.onload = () => {
-          if (state.sourceUrl) {
-            URL.revokeObjectURL(state.sourceUrl);
-          }
-
-          state.image = img;
-          state.sourceName = file.name.replace(/\.[^.]+$/, "");
-          state.sourceUrl = URL.createObjectURL(file);
-          els.fileName.textContent = file.name;
-          els.sourceStage.innerHTML = "";
-
-          const preview = new Image();
-          preview.src = state.sourceUrl;
-          preview.alt = file.name;
-          els.sourceStage.appendChild(preview);
-
-          if (!els.lockRatio.checked) {
-            setTargetSize(img.naturalWidth, img.naturalHeight);
-          } else {
-            syncLockedRatio(state.lastChangedDimension);
-          }
-
-          drawOutput();
-        };
-
-        img.onerror = () => {
-          setStatus("图片加载失败", true);
-        };
-
-        img.src = reader.result;
-      };
-
-      reader.onerror = () => {
-        setStatus("文件读取失败", true);
-      };
-
-      reader.readAsDataURL(file);
     }
 
     function canvasToBlob(canvas, mimeType, quality) {
@@ -1055,32 +1317,73 @@
       URL.revokeObjectURL(url);
     }
 
-    async function downloadOutput() {
-      if (!state.image) return;
+    function scheduleEstimate() {
+      clearTimeout(state.estimateTimer);
+      if (!state.image || els.canvasWrap.hidden) {
+        els.estimateMetric.textContent = "-";
+        return;
+      }
 
+      els.estimateMetric.textContent = "计算中";
+      const token = state.estimateToken + 1;
+      state.estimateToken = token;
+
+      state.estimateTimer = setTimeout(async () => {
+        const maxBytes = getMaxSizeBytes();
+        const quality = Number(els.quality.value) / 100;
+        const mimeType = els.format.value;
+        const { count } = getSplitGrid();
+
+        try {
+          if (count > 1) {
+            const tileCanvas = document.createElement("canvas");
+            const tileCtx = tileCanvas.getContext("2d");
+            const { width, height } = getTargetSize();
+            const { cols, rows } = getSplitGrid();
+            let total = 0;
+
+            for (let row = 0; row < rows; row += 1) {
+              const sy = Math.floor((row * height) / rows);
+              const nextY = Math.floor(((row + 1) * height) / rows);
+              const tileHeight = nextY - sy;
+
+              for (let col = 0; col < cols; col += 1) {
+                const sx = Math.floor((col * width) / cols);
+                const nextX = Math.floor(((col + 1) * width) / cols);
+                const tileWidth = nextX - sx;
+                tileCanvas.width = tileWidth;
+                tileCanvas.height = tileHeight;
+                tileCtx.clearRect(0, 0, tileWidth, tileHeight);
+                tileCtx.drawImage(els.outputCanvas, sx, sy, tileWidth, tileHeight, 0, 0, tileWidth, tileHeight);
+                const result = await createSizeLimitedBlob(tileCanvas, mimeType, quality, maxBytes);
+                total += result.blob ? result.blob.size : 0;
+              }
+            }
+
+            if (token === state.estimateToken) {
+              els.estimateMetric.textContent = `${formatBytes(total)} / ${count} 张`;
+            }
+            return;
+          }
+
+          const result = await createSizeLimitedBlob(els.outputCanvas, mimeType, quality, maxBytes);
+          if (token === state.estimateToken) {
+            els.estimateMetric.textContent = result.blob ? formatBytes(result.blob.size) : "-";
+          }
+        } catch {
+          if (token === state.estimateToken) {
+            els.estimateMetric.textContent = "-";
+          }
+        }
+      }, 250);
+    }
+
+    async function buildFilesFromCanvas(canvas, safeName) {
       const { width, height } = getTargetSize();
-      const validation = validateTargetSize(width, height);
-      if (validation) {
-        setStatus(validation, true);
-        return;
-      }
-
-      const splitValidation = validateSplitGrid(width, height);
-      if (splitValidation) {
-        setStatus(splitValidation, true);
-        return;
-      }
-
-      drawOutput();
-
       const quality = Number(els.quality.value) / 100;
       const mimeType = els.format.value;
       const maxBytes = getMaxSizeBytes();
-      const safeName = state.sourceName || "image";
       const { cols, rows, count } = getSplitGrid();
-
-      els.downloadBtn.disabled = true;
-      setStatus(count > 1 ? `正在切成 ${count} 张图片...` : maxBytes > 0 ? "正在压缩到目标大小..." : "正在导出...");
 
       if (count > 1) {
         const files = [];
@@ -1103,13 +1406,11 @@
             tileCanvas.width = tileWidth;
             tileCanvas.height = tileHeight;
             tileCtx.clearRect(0, 0, tileWidth, tileHeight);
-            tileCtx.drawImage(els.outputCanvas, sx, sy, tileWidth, tileHeight, 0, 0, tileWidth, tileHeight);
+            tileCtx.drawImage(canvas, sx, sy, tileWidth, tileHeight, 0, 0, tileWidth, tileHeight);
 
             const result = await createSizeLimitedBlob(tileCanvas, mimeType, quality, maxBytes);
             if (!result.blob) {
-              els.downloadBtn.disabled = false;
-              setStatus("切图导出失败", true);
-              return;
+              throw new Error("切图导出失败");
             }
 
             changedFormat = changedFormat || result.changedFormat;
@@ -1122,50 +1423,135 @@
           }
         }
 
-        const zipBlob = await createZip(files);
-        const zipName = `${safeName}_${width}x${height}_${cols}x${rows}.zip`;
-        downloadBlob(zipBlob, zipName);
-        els.downloadBtn.disabled = false;
-
-        if (tooLargeCount > 0) {
-          setStatus(`已导出 ${zipName}。其中 ${tooLargeCount} 张最低质量仍超过 ${formatBytes(maxBytes)}`, true);
-        } else if (changedFormat) {
-          setStatus(`已导出 ${zipName}，共 ${count} 张，图片总大小 ${formatBytes(totalSize)}。PNG 已自动改为 JPEG。`);
-        } else {
-          setStatus(`已导出 ${zipName}，共 ${count} 张，图片总大小 ${formatBytes(totalSize)}`);
-        }
-        return;
+        return { files, changedFormat, tooLargeCount, totalSize, count };
       }
 
-      const result = await createSizeLimitedBlob(els.outputCanvas, mimeType, quality, maxBytes);
-      els.downloadBtn.disabled = false;
+      const result = await createSizeLimitedBlob(canvas, mimeType, quality, maxBytes);
       if (!result.blob) {
-        setStatus("导出失败", true);
+        throw new Error("导出失败");
+      }
+
+      return {
+        files: [{
+          name: `${safeName}_${width}x${height}.${result.extension}`,
+          blob: result.blob
+        }],
+        changedFormat: result.changedFormat,
+        tooLargeCount: result.tooLarge ? 1 : 0,
+        totalSize: result.blob.size,
+        count: 1,
+        quality: result.quality,
+        limited: result.limited
+      };
+    }
+
+    async function downloadOutput() {
+      if (!state.image) return;
+
+      const { width, height } = getTargetSize();
+      const validation = validateTargetSize(width, height);
+      if (validation) {
+        setStatus(validation, true);
         return;
       }
 
-      const fileName = `${safeName}_${width}x${height}.${result.extension}`;
-      downloadBlob(result.blob, fileName);
+      const splitValidation = validateSplitGrid(width, height);
+      if (splitValidation) {
+        setStatus(splitValidation, true);
+        return;
+      }
 
-      if (result.tooLarge) {
-        setStatus(`最低质量仍为 ${formatBytes(result.blob.size)}，无法低于 ${formatBytes(maxBytes)}`, true);
-      } else if (result.changedFormat) {
-        setStatus(`已导出 ${fileName}，大小 ${formatBytes(result.blob.size)}。PNG 无法可靠控大小，已自动改为 JPEG。`);
-      } else if (result.limited) {
-        setStatus(`已导出 ${fileName}，大小 ${formatBytes(result.blob.size)}，质量约 ${Math.round(result.quality * 100)}%`);
-      } else {
-        setStatus(`已导出 ${fileName}，大小 ${formatBytes(result.blob.size)}`);
+      drawOutput();
+
+      const maxBytes = getMaxSizeBytes();
+      const { cols, rows, count } = getSplitGrid();
+
+      els.downloadBtn.disabled = true;
+      setStatus(state.images.length > 1 ? `正在批量处理 ${state.images.length} 张图片...` : count > 1 ? `正在切成 ${count} 张图片...` : maxBytes > 0 ? "正在压缩到目标大小..." : "正在导出...");
+
+      try {
+        if (state.images.length > 1) {
+          const exportCanvas = document.createElement("canvas");
+          const files = [];
+          let totalSize = 0;
+          let tooLargeCount = 0;
+          let changedFormat = false;
+
+          for (const item of state.images) {
+            drawImageToCanvas(item.image, exportCanvas);
+            const result = await buildFilesFromCanvas(exportCanvas, item.name);
+            changedFormat = changedFormat || result.changedFormat;
+            tooLargeCount += result.tooLargeCount;
+            totalSize += result.totalSize;
+            result.files.forEach((file) => {
+              files.push({
+                name: `${item.name}/${file.name}`,
+                blob: file.blob
+              });
+            });
+          }
+
+          const zipBlob = await createZip(files);
+          const zipName = `piccut_batch_${width}x${height}.zip`;
+          downloadBlob(zipBlob, zipName);
+
+          if (tooLargeCount > 0) {
+            setStatus(`已导出 ${zipName}。其中 ${tooLargeCount} 张最低质量仍超过 ${formatBytes(maxBytes)}`, true);
+          } else if (changedFormat) {
+            setStatus(`已导出 ${zipName}，共 ${files.length} 个文件，总大小 ${formatBytes(totalSize)}。PNG 已自动改为 JPEG。`);
+          } else {
+            setStatus(`已导出 ${zipName}，共 ${files.length} 个文件，总大小 ${formatBytes(totalSize)}`);
+          }
+          return;
+        }
+
+        const result = await buildFilesFromCanvas(els.outputCanvas, state.sourceName || "image");
+
+        if (result.files.length > 1) {
+          const zipBlob = await createZip(result.files);
+          const zipName = `${state.sourceName || "image"}_${width}x${height}_${cols}x${rows}.zip`;
+          downloadBlob(zipBlob, zipName);
+
+          if (result.tooLargeCount > 0) {
+            setStatus(`已导出 ${zipName}。其中 ${result.tooLargeCount} 张最低质量仍超过 ${formatBytes(maxBytes)}`, true);
+          } else if (result.changedFormat) {
+            setStatus(`已导出 ${zipName}，共 ${result.count} 张，图片总大小 ${formatBytes(result.totalSize)}。PNG 已自动改为 JPEG。`);
+          } else {
+            setStatus(`已导出 ${zipName}，共 ${result.count} 张，图片总大小 ${formatBytes(result.totalSize)}`);
+          }
+          return;
+        }
+
+        const file = result.files[0];
+        downloadBlob(file.blob, file.name);
+
+        if (result.tooLargeCount > 0) {
+          setStatus(`最低质量仍为 ${formatBytes(file.blob.size)}，无法低于 ${formatBytes(maxBytes)}`, true);
+        } else if (result.changedFormat) {
+          setStatus(`已导出 ${file.name}，大小 ${formatBytes(file.blob.size)}。PNG 无法可靠控大小，已自动改为 JPEG。`);
+        } else if (result.limited) {
+          setStatus(`已导出 ${file.name}，大小 ${formatBytes(file.blob.size)}，质量约 ${Math.round(result.quality * 100)}%`);
+        } else {
+          setStatus(`已导出 ${file.name}，大小 ${formatBytes(file.blob.size)}`);
+        }
+      } catch (error) {
+        setStatus(error.message || "导出失败", true);
+      } finally {
+        els.downloadBtn.disabled = false;
       }
     }
 
     function resetAll() {
+      clearTimeout(state.estimateTimer);
+      state.estimateToken += 1;
       els.fileInput.value = "";
       els.fileName.textContent = "未选择文件";
       els.sourceStage.innerHTML = '<div class="empty-state">选择图片后显示</div>';
-      els.outputCanvas.hidden = true;
+      els.canvasWrap.hidden = true;
       els.outputEmpty.hidden = false;
       els.sourceMetric.textContent = "-";
       els.sourceSizeLabel.textContent = "-";
+      els.estimateMetric.textContent = "-";
       setTargetSize(1080, 1080);
       els.lockRatio.checked = false;
       els.format.value = "image/png";
@@ -1173,22 +1559,25 @@
       els.maxSizeKb.value = "";
       els.splitCols.value = "1";
       els.splitRows.value = "1";
+      els.cropAnchor.value = "center";
       els.quality.value = "92";
       els.qualityValue.textContent = "92%";
       document.querySelector('input[name="fitMode"][value="contain"]').checked = true;
+      state.images.forEach((item) => URL.revokeObjectURL(item.url));
+      state.images = [];
+      state.activeIndex = -1;
       state.image = null;
       state.sourceName = "";
-      if (state.sourceUrl) {
-        URL.revokeObjectURL(state.sourceUrl);
-        state.sourceUrl = "";
-      }
+      state.sourceUrl = "";
+      els.queuePanel.hidden = true;
+      els.imageList.innerHTML = "";
       els.downloadBtn.disabled = true;
       setStatus("");
       updateMetrics();
     }
 
     els.fileInput.addEventListener("change", (event) => {
-      loadFile(event.target.files[0]);
+      loadFiles(event.target.files);
     });
 
     els.dropZone.addEventListener("dragover", (event) => {
@@ -1203,7 +1592,7 @@
     els.dropZone.addEventListener("drop", (event) => {
       event.preventDefault();
       els.dropZone.classList.remove("is-dragging");
-      loadFile(event.dataTransfer.files[0]);
+      loadFiles(event.dataTransfer.files);
     });
 
     els.targetWidth.addEventListener("input", () => {
@@ -1227,9 +1616,21 @@
       radio.addEventListener("change", drawOutput);
     });
 
+    els.presetGrid.addEventListener("click", (event) => {
+      const button = event.target.closest(".preset-btn");
+      if (!button) return;
+
+      setTargetSize(Number(button.dataset.width), Number(button.dataset.height));
+      drawOutput();
+    });
+
+    els.cropAnchor.addEventListener("change", drawOutput);
     els.format.addEventListener("change", drawOutput);
     els.backgroundColor.addEventListener("input", drawOutput);
-    els.maxSizeKb.addEventListener("input", updateMetrics);
+    els.maxSizeKb.addEventListener("input", () => {
+      updateMetrics();
+      scheduleEstimate();
+    });
     els.splitCols.addEventListener("input", drawOutput);
     els.splitRows.addEventListener("input", drawOutput);
     els.quality.addEventListener("input", () => {
